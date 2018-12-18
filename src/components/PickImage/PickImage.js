@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { View, Button, Image } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
@@ -24,11 +25,13 @@ class PickImage extends React.Component {
         // const source = { uri: response.uri };
 
         // You can also display the image using data:
-        const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        const uri = 'data:image/jpeg;base64,' + response.data;
+        const source = { uri };
 
         this.setState({
           image: source,
         });
+        this.props.handlePickImage(uri)
       }
     });
   }
@@ -43,6 +46,10 @@ class PickImage extends React.Component {
       </View>
     )
   }
+}
+
+PickImage.propTypes = {
+  handlePickImage: PropTypes.func.isRequired,
 }
 
 export default PickImage;

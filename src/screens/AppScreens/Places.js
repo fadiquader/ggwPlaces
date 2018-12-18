@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 //
 
 class Places extends React.Component {
@@ -7,13 +7,42 @@ class Places extends React.Component {
     title: 'Places',
   });
 
+  renderItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity style={styles.placeItem}>
+        <Image source={{uri: item.picture}}/>
+        <Text>{item.name}</Text>
+      </TouchableOpacity>
+    )
+  }
   render() {
     return (
-      <View>
-        <Text>Places</Text>
-      </View>
+      <FlatList
+        data={[
+          {
+            _id: '1',
+            name: 'sdfsdf',
+            picture: ''
+          },
+          {
+            _id: '2',
+            name: 'sdfsdf',
+            picture: ''
+          },
+        ]}
+        renderItem={this.renderItem}
+        keyExtractor={item => item._id}
+      />
     )
   }
 }
+
+const styles = StyleSheet.create({
+  placeItem: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f5f5f5'
+  }
+});
 
 export default Places;
