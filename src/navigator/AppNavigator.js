@@ -1,10 +1,12 @@
 import React from 'react';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 //
 import Places from '../screens/AppScreens/Places';
 import AddPlace from '../screens/AppScreens/AddPlace';
 import PlaceDetails from '../screens/AppScreens/PlaceDetails';
+import Login from '../screens/AuthScreens/Login';
+import Launch from '../screens/Launch';
 
 const PlacesStack = createStackNavigator({
   Places: Places,
@@ -35,7 +37,7 @@ const AddPlaceStack = createStackNavigator({
     )
   }
 })
-const AppNavigator = createBottomTabNavigator({
+const AppStack = createBottomTabNavigator({
   PlacesStack,
   AddPlaceStack
 }, {
@@ -48,4 +50,13 @@ const AppNavigator = createBottomTabNavigator({
   },
 });
 
+const AuthStack = createStackNavigator({
+  Login: Login
+})
+
+const AppNavigator = createSwitchNavigator({
+  Launch,
+  Auth: AuthStack,
+  App: AppStack,
+})
 export default AppNavigator;

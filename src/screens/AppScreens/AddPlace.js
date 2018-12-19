@@ -4,6 +4,7 @@ import { View, ScrollView, Button } from 'react-native';
 import Input from '../../components/Input';
 import PickImage from '../../components/PickImage';
 import PickLocation from '../../components/PickLocation';
+import { Place } from "../../services/Place";
 
 class AddPlace extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -15,8 +16,19 @@ class AddPlace extends React.Component {
     picture: null
   };
 
-  addPlace = () => {
-    console.log(this.state)
+  addPlace = async () => {
+    try {
+      await Place.addPlace(this.state);
+      this.setState({
+        name: '',
+        location: null,
+        picture: null
+      });
+      this.props.navigation.navigate('Places')
+    } catch (e) {
+      alert(e.message)
+    }
+    // console.log(this.state)
   }
   render() {
     return (
